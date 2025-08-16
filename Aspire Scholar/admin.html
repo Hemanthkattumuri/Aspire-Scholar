@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Portal - Aspire Scholar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: url('https://www.freepik.com/free-photo/book-laptop-pencil-clock-wooden-table-library-education-learning-concept_5473634.htm#fromView=keyword&page=1&position=5&uuid=37ed357c-9da3-4c94-bc0e-0fe14d829ed6&query=Scholarship');
+            background-size: cover;
+            background-position: center;
+        }
+        header {
+            background-color: #009688;
+            color: white;
+            padding: 20px 0;
+            width: 100%;
+        }
+        h1 {
+            margin: 0;
+        }
+        nav {
+            background-color: #00796b;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            width: 100%;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 20px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 35%;
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        select, input, button {
+            width: 100%;
+            max-width: 500px;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #009688;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #00796b;
+        }
+        .toggle-link {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .toggle-link a {
+            color: #009688;
+            text-decoration: none;
+        }
+        .toggle-link a:hover {
+            text-decoration: underline;
+        }
+        #loginForm, #registrationForm, #scholarshipForm {
+            display: none;
+        }
+    </style>
+    <script>
+        function showForm(formId) {
+            document.getElementById('registrationForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('scholarshipForm').style.display = 'none';
+            document.getElementById(formId).style.display = 'block';
+        }
+
+        function storeRegistrationDetails() {
+            const administration = document.querySelector('[name="administration"]').value;
+            const username = document.querySelector('[name="username"]').value;
+            const password = document.querySelector('[name="password"]').value;
+            const email = document.querySelector('[name="email"]').value;
+            const phone = document.querySelector('[name="phone"]').value;
+
+            const adminDetails = {
+                administration,
+                username,
+                password,
+                email,
+                phone,
+            };
+
+            localStorage.setItem('adminDetails', JSON.stringify(adminDetails));
+            alert('Registration details stored successfully!');
+        }
+
+        function validateLoginDetails() {
+            const username = document.querySelector('#loginForm [name="username"]').value;
+            const password = document.querySelector('#loginForm [name="password"]').value;
+            const storedDetails = JSON.parse(localStorage.getItem('adminDetails'));
+
+            if (storedDetails && storedDetails.username === username && storedDetails.password === password) {
+                alert('Login successful!');
+                showForm('scholarshipForm');
+            } else {
+                alert('Invalid username or password!');
+            }
+        }
+
+        function toggleOptions() {
+            const typeOfClass = document.querySelector('[name="classType"]').value;
+            document.getElementById('schoolClass').style.display = typeOfClass === 'class' ? 'block' : 'none';
+            document.getElementById('intermediate').style.display = typeOfClass === 'intermediate' ? 'block' : 'none';
+            document.getElementById('diploma').style.display = typeOfClass === 'diploma' ? 'block' : 'none';
+            document.getElementById('undergraduateCourse').style.display = typeOfClass === 'undergraduate' ? 'block' : 'none';
+            document.getElementById('pgCourse').style.display = typeOfClass === 'pg' ? 'block' : 'none';
+        }
+
+        function storeScholarshipDetails() {
+            const scholarshipDetails = {
+                scholarshipType: document.querySelector('[name="scholarshipType"]').value,
+                gender: document.querySelector('[name="gender"]').value,
+                classType: document.querySelector('[name="classType"]').value,
+                classNumber: document.querySelector('[name="classNumber"]').value,
+                intermediateYear: document.querySelector('[name="intermediateYear"]').value,
+                diplomaCourse: document.querySelector('[name="diplomaCourse"]').value,
+                ugCourse: document.querySelector('[name="ugCourse"]').value,
+                pgCourse: document.querySelector('[name="pgCourse"]').value,
+                amount: document.querySelector('[name="amount"]').value,
+                caste: document.querySelector('[name="caste"]').value,
+            };
+
+            let scholarships = JSON.parse(localStorage.getItem('scholarships')) || [];
+            scholarships.push(scholarshipDetails);
+            localStorage.setItem('scholarships', JSON.stringify(scholarships));
+            alert('Scholarship details submitted successfully!');
+        }
+    </script>
+</head>
+<body onload="showForm('registrationForm')">
+    <header>
+        <h1>Admin Portal</h1>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="admin.html">Admin Portal</a>
+        <a href="studentlogin.html">Student Login</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+    </nav>
+    <div class="container">
+        <div id="registrationForm">
+            <form onsubmit="storeRegistrationDetails(); return false;">
+                <select name="administration" required>
+                    <option value="" disabled selected>Select Administration</option>
+                    <option value="company">Company</option>
+                    <option value="organization">Organization</option>
+                    <option value="institution">Institution</option>
+                </select>
+                <input type="text" name="username" placeholder="Username" required />
+                <input type="password" name="password" placeholder="Password" required />
+                <input type="email" name="email" placeholder="Email" required />
+                <input type="text" name="phone" placeholder="Phone Number" required />
+                <button type="submit">Register</button>
+                <div class="toggle-link">Already have an account? <a href="#" onclick="showForm('loginForm')">Login</a></div>
+            </form>
+        </div>
+
+        <div id="loginForm">
+            <form onsubmit="validateLoginDetails(); return false;">
+                <input type="text" name="username" placeholder="Username" required />
+                <input type="password" name="password" placeholder="Password" required />
+                <div class="button-group">
+                    <button type="submit">Login</button>
+                    <button type="button" onclick="showForm('registrationForm')">Back</button>
+                </div>
+                <div class="toggle-link">Don't have an account? <a href="#" onclick="showForm('registrationForm')">Register</a></div>
+            </form>
+        </div>
+
+        <div id="scholarshipForm">
+            <form onsubmit="storeScholarshipDetails(); return false;">
+                <input type="text" name="scholarshipType" placeholder="Type of Scholarship" required />
+                <select name="gender" required>
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="boys">Boys</option>
+                    <option value="girls">Girls</option>
+                    <option value="both">Both</option>
+                </select>
+                <select name="classType" onchange="toggleOptions()" required>
+                    <option value="" disabled selected>Select Class Type</option>
+                    <option value="class">Class</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="diploma">Diploma</option>
+                    <option value="undergraduate">Undergraduate</option>
+                    <option value="pg">Postgraduate</option>
+                </select>
+
+                <div id="schoolClass" style="display:none;">
+                    <select name="classNumber" required>
+                        <option value="" disabled selected>Select Class</option>
+                        <option value="1">Class 1</option>
+                        <option value="2">Class 2</option>
+                        <option value="3">Class 3</option>
+                        <option value="4">Class 4</option>
+                        <option value="5">Class 5</option>
+                        <option value="6">Class 6</option>
+                        <option value="7">Class 7</option>
+                        <option value="8">Class 8</option>
+                        <option value="9">Class 9</option>
+                        <option value="10">Class 10</option>
+                    </select>
+                </div>
+
+                <div id="intermediate" style="display:none;">
+                    <select name="intermediateYear" required>
+                        <option value="" disabled selected>Select Year</option>
+                        <option value="1">1st Year</option>
+                        <option value="2">2nd Year</option>
+                    </select>
+                </div>
+
+                <div id="diploma" style="display:none;">
+                    <select name="diplomaCourse" required>
+                        <option value="" disabled selected>Select Diploma Course</option>
+                        <option value="computerScience">Computer Science</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="mechanical">Mechanical</option>
+                        <option value="civil">Civil</option>
+                    </select>
+                </div>
+
+                <div id="undergraduateCourse" style="display:none;">
+                    <select name="ugCourse" required>
+                        <option value="" disabled selected>Select Undergraduate Course</option>
+                        <option value="btech">B.Tech</option>
+                        <option value="bsc">B.Sc</option>
+                        <option value="bcom">B.Com</option>
+                        <option value="ba">B.A</option>
+                    </select>
+                </div>
+
+                <div id="pgCourse" style="display:none;">
+                    <select name="pgCourse" required>
+                        <option value="" disabled selected>Select Postgraduate Course</option>
+                        <option value="mtech">M.Tech</option>
+                        <option value="msc">M.Sc</option>
+                        <option value="mba">MBA</option>
+                        <option value="ma">M.A</option>
+                    </select>
+                </div>
+
+                <input type="number" name="amount" placeholder="Scholarship Amount" required />
+                <select name="caste" required>
+                    <option value="" disabled selected>Select Caste</option>
+                    <option value="general">General</option>
+                    <option value="obc">OBC</option>
+                    <option value="sc">SC</option>
+                    <option value="st">ST</option>
+                </select>
+                <button type="submit">Submit Scholarship</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

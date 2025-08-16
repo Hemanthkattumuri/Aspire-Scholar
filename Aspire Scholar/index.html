@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aspire Scholar</title>
+    <meta name="description" content="Aspire Scholar - Empowering students through scholarships to achieve their academic dreams." />
+    <meta name="keywords" content="scholarships, education, student aid, Aspire Scholar, financial support" />
+    <meta name="author" content="Aspire Scholar Team" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        /* Styles extracted inline from the PDF */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #009688;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #00796b;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+        nav a:hover {
+            text-decoration: underline;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: url('https://www.dailyexcelsior.com/wp-content/uploads/2019/05/Scholarship.jpg') no-repeat center center;
+            background-size: cover;
+            border-radius: 10px;
+            margin: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .text {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            color: white;
+            max-width: 800px;
+            width: 90%;
+            text-align: left;
+        }
+        h1, h2 {
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        footer {
+            background-color: #00796b;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: auto;
+        }
+        /* Responsive Queries */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+            .text {
+                width: 100%;
+                padding: 20px;
+            }
+        }
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.5rem;
+            }
+            p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Aspire Scholar</h1>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="admin.html">Admin Login</a>
+        <a href="studentlogin.html">Student Login</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+    </nav>
+    <main class="content">
+        <div class="text">
+            <h2>The Importance of Scholarships</h2>
+            <p>Scholarships are vital as they provide crucial financial support to students, easing the burden of tuition fees, books, and living expenses. This financial aid allows students to focus on their studies, participating in enriching activities and opportunities without the constant worry of financial pressures.</p>
+            <p>Through scholarships, students can access higher education, leading to better career prospects and contributing to their personal growth and development. Additionally, scholarships promote diversity and inclusivity, enabling students from all backgrounds to pursue their educational goals and dreams.</p>
+            <p>At Aspire Scholar, our mission is to support the academic journey of students by offering various scholarships that cater to diverse needs and aspirations. Join us in empowering future leaders and innovators, helping them realize their potential and achieve greatness through education.</p>
+        </div>
+    </main>
+    <footer>
+        &copy; 2024 Aspire Scholar. All rights reserved.
+    </footer>
+</body>
+</html>
